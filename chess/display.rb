@@ -31,17 +31,17 @@ class Display
 
 end
 
-
-if __FILE__ == $PROGRAM_NAME
-  b = Board.new
-  d = Display.new(b)
-  index = 0
-  while index < 4
-    d.render
-    d.cursor.get_input
-    p d.cursor.cursor_pos
-    sleep(0.5)
-    system "clear"
-    index += 1
-  end
-end
+# 
+# if __FILE__ == $PROGRAM_NAME
+#   b = Board.new
+#   d = Display.new(b)
+#   index = 0
+#   while index < 4
+#     d.render
+#     d.cursor.get_input
+#     p d.cursor.cursor_pos
+#     sleep(0.5)
+#     system "clear"
+#     index += 1
+#   end
+# end
