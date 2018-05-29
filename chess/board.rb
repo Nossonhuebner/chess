@@ -6,17 +6,21 @@ class CannotMoveError < StandardError ; end
 class Board
   attr_accessor :grid
 
-  def initialize
-    @grid = [] #{Array.new(8, nil)}
-    [0, 1, 6, 7].each do |idx|
-      @grid[idx] = Array.new(8, Piece.new)
-    end
-    (2..5).each do |idx|
-      @grid[idx] = Array.new(8, nil)
+  def initialize(board = nil)
+    if board
+      @grid = board
+    else
+      @grid = [] #{Array.new(8, nil)}
+      [0, 1, 6, 7].each do |idx|
+        @grid[idx] = Array.new(8, Piece.new)
+      end
+      (2..5).each do |idx|
+        @grid[idx] = Array.new(8, nil)
+      end
     end
   end
 
-  def move_piece(start_pos, end_pos)
+  def move_piece!(color, start_pos, end_pos)
     if start_pos == nil
       raise NoPieceError.new("No Piece Selected")
     elsif !valid_space?(end_pos)
@@ -36,7 +40,37 @@ class Board
     @grid[row][col] = arg
   end
 
-  def valid_space?(pos)
+  def valid_pos?(pos)
     self[pos].nil? && pos.all? {|el| el < 8 && el > -1}
   end
+
+  def add_piece(piece,pos)
+  end
+
+  def checkmate?(color)
+  end
+
+  def in_check?(color)
+  end
+
+  def find_king(color)
+  end
+
+  def pieces
+  end
+
+  def move_piece(color, start_pos, end_pos)
+    temp_arr = self.grid.dup
+    temp_board = Board.new(temp_arr)
+    temp_board.move_piece!(color, start_pos, end_pos)
+  end
+
+  def dup
+    new_array = []
+    self.each do |el|
+      new_array << (el.is_a?(Array) ? el.deep_dup : el)
+    end
+    new_array
+  end
+
 end

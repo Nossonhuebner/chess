@@ -7,6 +7,7 @@ class Display
   def initialize(board)
     @board = board
     @cursor = Cursor.new([0, 0], board)
+    @debug = false 
   end
 
   def render
@@ -31,7 +32,7 @@ class Display
 
 end
 
-# 
+#
 # if __FILE__ == $PROGRAM_NAME
 #   b = Board.new
 #   d = Display.new(b)
