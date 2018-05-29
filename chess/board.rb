@@ -8,52 +8,55 @@ require_relative "nullpiece.rb"
 require_relative "pawn.rb"
 require_relative "queen.rb"
 
+require 'byebug'
+
 class NoPieceError < StandardError ; end
 class CannotMoveError < StandardError ; end
 
 class Board
   attr_accessor :grid
 
-  def initialize(board = nil)
-    if board
-      @grid = board
-    else
-      @grid = [] #{Array.new(8, nil)}
 
 
+  def initialize
+    @grid = [] #{Array.new(8, nil)
+    populate_board
+  end
 
-      @grid[0] = [Rook.new(:black, nil, [0,0]), Knight.new(:black, nil, [0,1]),
-                  Bishop.new(:black, nil, [0,2]), Queen.new(:black, nil, [0,3]),
-                King.new(:black, nil, [0,4]), Bishop.new(:black, nil, [0,5]),
-                Knight.new(:black, nil, [0,6]), Rook.new(:black, nil, [0,7])]
+  def populate_board
+    @grid[0] = [
+      Rook.new(:black, self, [0,0]), Knight.new(:black, self, [0,1]),
+      Bishop.new(:black, self, [0,2]), Queen.new(:black, self, [0,3]),
+      King.new(:black, self, [0,4]), Bishop.new(:black, self, [0,5]),
+      Knight.new(:black, self, [0,6]), Rook.new(:black, self, [0,7])
+    ]
 
-      i = 0
-      arr = []
-      while i < 8
-        arr << Pawn.new(:black, nil, [1, i])
-        i += 1
-      end
-      @grid[1] = arr
-
-      (2..5).each do |idx|
-        @grid[idx] = Array.new(8, NullPiece.instance)
-      end
-
-      i = 0
-      arr = []
-      while i < 8
-        arr << Pawn.new(:white, nil, [6, i])
-        i += 1
-      end
-      @grid[6] = arr
-
-      @grid[7] = [Rook.new(:white, nil, [7,0]), Knight.new(:white, nil, [7,1]),
-                  Bishop.new(:white, nil, [7,2]), Queen.new(:white, nil, [7,3]),
-                King.new(:white, nil, [7,4]), Bishop.new(:white, nil, [7,5]),
-                Knight.new(:white, nil, [7,6]), Rook.new(:white, nil, [7,7])]
-
-
+    i = 0
+    arr = []
+    while i < 8
+      arr << Pawn.new(:black, self, [1, i])
+      i += 1
     end
+    @grid[1] = arr
+
+    (2..5).each do |idx|
+      @grid[idx] = Array.new(8, NullPiece.instance)
+    end
+
+    i = 0
+    arr = []
+    while i < 8
+      arr << Pawn.new(:white, self, [6, i])
+      i += 1
+    end
+    @grid[6] = arr
+
+    @grid[7] = [
+      Rook.new(:white, self, [7,0]), Knight.new(:white, self, [7,1]),
+      Bishop.new(:white, self, [7,2]), Queen.new(:white, self, [7,3]),
+      King.new(:white, self, [7,4]), Bishop.new(:white, self, [7,5]),
+      Knight.new(:white, self, [7,6]), Rook.new(:white, self, [7,7])
+    ]
   end
 
   def move_piece!(color, start_pos, end_pos)
@@ -66,13 +69,15 @@ class Board
     self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
   end
 
-  def [](pos)
+  def [](*pos)
+    debugger
     row, col = pos
     @grid[row][col]
   end
 
   def []=(pos, arg)
     row, col = pos
+    # debugger
     @grid[row][col] = arg
   end
 
@@ -88,6 +93,8 @@ class Board
 
   def in_check?(color)
     king_pos = find_king(color)
+    enemy_color = other_color(color)
+
 
   end
 
@@ -114,6 +121,14 @@ class Board
       new_array << (el.is_a?(Array) ? el.deep_dup : el)
     end
     new_array
+  end
+
+  def other_color(color)
+    if :black
+      return :white
+    else
+      return :black
+    end
   end
 
 end

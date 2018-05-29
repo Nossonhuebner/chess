@@ -9,6 +9,14 @@ class Pawn < Piece
     forward_steps + side_attacks
   end
 
+  def moves
+    dirs = move_dirs
+
+    dirs.reject do |move|
+      move.any? { |coord| coord > 7 || coord < 0  }
+    end
+  end
+
   private
 
   def at_start_row?
@@ -29,10 +37,10 @@ class Pawn < Piece
 
   def forward_steps
     row, col = pos
-    if at_start_row?
-      [[row + forward_dir, col], [row + (forward_dir * 2), col]]
-    else
-      [[row + forward_dir, col]]
+    moves = []
+    moves << [row + forward_dir, col] if self.board[row + forward_dir, col].color == :null
+    if at_start_row? && self.board[row + forward_dir, col].color == :null && self.board[row + (forward_dir * 2), col].color == :null
+      moves << [row + (forward_dir * 2), col]
     end
   end
 
