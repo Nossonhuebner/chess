@@ -9,11 +9,16 @@ module SlidingPiece
       until pos_row > 6 || pos_col > 6 || pos_col < 1 || pos_row < 1
         pos_row += row
         pos_col += col
-        potential_moves << [pos_row, pos_col]
+        temp_pos = [pos_row, pos_col]
+        break unless self.board[temp_pos].is_a?(NullPiece.rb)
+        potential_moves << temp_pos
       end
     end
     potential_moves
   end
 
-  
+  private
+
+  def move_dirs
+  end
 end
