@@ -10,8 +10,10 @@ module SlidingPiece
         pos_row += row
         pos_col += col
         temp_pos = [pos_row, pos_col]
-        break unless self.board[temp_pos].is_a?(NullPiece.rb)
+        # break unless self.board[temp_pos].is_a?(NullPiece.rb)
+         break if self.board[temp_pos].color == self.color
         potential_moves << temp_pos
+        break if self.board[temp_pos].color != self.color
       end
     end
     potential_moves

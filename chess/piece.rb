@@ -19,14 +19,15 @@ class Piece
   end
 
   def valid_moves
-    moves = self.moves
-
+    move = moves
+    move.reject { |mv| board[mv].color == color }
   end
 
   def pos=(val)
   end
 
   def symbol
+    self.class.to_s.to_sym
   end
 
   private
