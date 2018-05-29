@@ -10,6 +10,6 @@ class Bishop < Piece
   end
 
   def symbol
-    "♗".colorize(self.color)
+    "♝".colorize(self.color)
   end
 end

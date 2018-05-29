@@ -1,12 +1,11 @@
 class NoSymbolError < StandardError; end
 
 class Piece
-  attr_accessor :pos, :type
+  attr_accessor :pos 
 
   attr_reader :board, :color
 
-  def initialize(color = :null, board, pos)
-    @type = "O"
+  def initialize(color = :null, board = nil, pos = nil )
     @color = color
     @board = board
     @pos = pos

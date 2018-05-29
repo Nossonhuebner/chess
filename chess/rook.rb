@@ -1,5 +1,5 @@
 require_relative "piece.rb"
-class Rook < piece
+class Rook < Piece
 
 
   def move_dirs
@@ -7,7 +7,7 @@ class Rook < piece
   end
 
   def symbol
-    "♖".colorize(self.color)
+    "♜".colorize(self.color)
   end
 
 end

@@ -4,6 +4,10 @@ require_relative "steppingpiece.rb"
 class Knight < Piece
   include SteppingPiece
 
+  def symbol
+    "♞".colorize(self.color)
+  end
+
   private
 
   def move_diffs
@@ -19,9 +23,7 @@ class Knight < Piece
     moves
   end
 
-  def symbol
-    "♘".colorize(self.color)
-  end
+
 
 
 

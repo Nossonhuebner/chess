@@ -10,7 +10,7 @@ class Queen < Piece
   end
 
   def symbol
-    "♕".colorize(self.color)
+    "♛".colorize(self.color)
   end
 
 end
