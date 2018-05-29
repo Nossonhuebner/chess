@@ -1,9 +1,11 @@
+class NoSymbolError < StandardError; end
+
 class Piece
   attr_accessor :pos, :type
 
   attr_reader :board, :color
 
-  def initialize(color, board, pos)
+  def initialize(color = :null, board, pos)
     @type = "O"
     @color = color
     @board = board
@@ -27,7 +29,7 @@ class Piece
   end
 
   def symbol
-    self.class.to_s.to_sym
+    raise NoSymbolError.new("Symbol not assigned.")
   end
 
   private

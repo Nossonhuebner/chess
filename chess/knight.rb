@@ -19,6 +19,9 @@ class Knight < Piece
     moves
   end
 
+  def symbol
+    "♘".colorize(self.color)
+  end
 
 
 

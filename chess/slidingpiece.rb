@@ -13,7 +13,7 @@ module SlidingPiece
         # break unless self.board[temp_pos].is_a?(NullPiece.rb)
          break if self.board[temp_pos].color == self.color
         potential_moves << temp_pos
-        break if self.board[temp_pos].color != self.color
+        break if self.board[temp_pos].color != self.color && self.board[temp_pos].color != :null
       end
     end
     potential_moves

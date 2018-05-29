@@ -9,4 +9,7 @@ class Bishop < Piece
     dirs = [[1,1],[1,-1],[-1, 1], [-1,-1]]
   end
 
+  def symbol
+    "♗".colorize(self.color)
+  end
 end

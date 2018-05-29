@@ -7,21 +7,17 @@ class Display
   def initialize(board)
     @board = board
     @cursor = Cursor.new([0, 0], board)
-    @debug = false 
+    @debug = false
   end
 
   def render
     curs_row, curs_col = self.cursor.cursor_pos
     @board.grid.each_with_index do |row, row_idx|
       row.each_with_index do |el, col_idx|
-        if el.is_a?(Piece) && (curs_row == row_idx && curs_col == col_idx)
-          print " #{el.type} ".colorize(:color => :white, :background => :red)
-        elsif curs_row == row_idx && curs_col == col_idx
-          print "   ".colorize(:color => :white, :background => :red)
-        elsif el.is_a?(Piece)
-          print " #{el.type} "
+        if (curs_row == row_idx && curs_col == col_idx)
+          print " #{el.symbol} ".colorize(:background => :red)
         else
-          print "   "
+          print " #{el.symbol} "
         end
         print "|" if col_idx != row.length - 1
       end
